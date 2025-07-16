@@ -78,6 +78,8 @@ rm -f /tmp/raw_mysql_version.txt
 
 # If we have extra cnf files from user, copy them to where they go.
 if [ -d /mnt/ddev_config/mysql ] && [ "$(echo /mnt/ddev_config/mysql/*.cnf)" != "/mnt/ddev_config/mysql/*.cnf" ] ; then
+  # Ensure re-copying works on restart.
+  chmod -f -R ugo-w /etc/mysql/conf.d/*
   cp /mnt/ddev_config/mysql/*.cnf /etc/mysql/conf.d
   # Ignore errors on files such as .gitmanaged
   chmod -f -R ugo-w /etc/mysql/conf.d/*
